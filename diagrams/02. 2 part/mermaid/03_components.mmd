@@ -1,0 +1,133 @@
+%%{init: {
+
+"theme": "base",
+
+"themeVariables": {
+
+"fontFamily": "Arial",
+
+"fontSize": "18px",
+
+"primaryTextColor": "\#1f2937",
+
+"lineColor": "\#5b7ea4",
+
+"tertiaryColor": "\#ffffff",
+
+"background": "\#ffffff"
+
+}
+
+}}%%
+
+ 
+
+flowchart LR
+
+ 
+
+subgraph L["Доступ и взаимодействие"]
+
+direction TB
+
+ACCESS["Роли и права"]
+
+UI["Интерфейсные подсистемы"]
+
+ACCESS --\>\|"управляют доступом"\| UI
+
+end
+
+ 
+
+subgraph C["Операционное ядро"]
+
+direction TB
+
+NSI["НСИ"]
+
+DOC["Документы"]
+
+REG["Регистры накопления"]
+
+ 
+
+NSI --\>\|"используются при заполнении"\| DOC
+
+DOC --\>\|"формируют движения"\| REG
+
+end
+
+ 
+
+subgraph R["Аналитика"]
+
+direction TB
+
+REP["Отчёты СКД"]
+
+end
+
+ 
+
+subgraph T["Управляющие механизмы"]
+
+direction TB
+
+LOGIC["Программная логика"]
+
+BP["Бизнес-процесс и задачи"]
+
+end
+
+ 
+
+UI --\>\|"работа пользователя"\| DOC
+
+UI --\>\|"просмотр и ввод НСИ"\| NSI
+
+ 
+
+REG --\>\|"источник данных"\| REP
+
+ 
+
+LOGIC --\>\|"обработка проведения"\| DOC
+
+LOGIC --\>\|"запись, контроль, вычисления"\| REG
+
+ 
+
+BP --\>\|"регламентируют действия"\| DOC
+
+BP --\>\|"задают контрольные точки"\| REP
+
+ 
+
+classDef access fill:\#eaf2ff,stroke:\#4c78a8,stroke-width:2px,color:\#1f2937;
+
+classDef core fill:\#eafaf1,stroke:\#3fa26b,stroke-width:2px,color:\#1f2937;
+
+classDef report fill:\#f3ecff,stroke:\#7b61c9,stroke-width:2px,color:\#1f2937;
+
+classDef control fill:\#fff4e5,stroke:\#d9912b,stroke-width:2px,color:\#1f2937;
+
+ 
+
+class ACCESS,UI access;
+
+class NSI,DOC,REG core;
+
+class REP report;
+
+class LOGIC,BP control;
+
+ 
+
+style L fill:\#f8fbff,stroke:\#c7d7eb,stroke-width:1.5px
+
+style C fill:\#f7fcf9,stroke:\#c7e7d4,stroke-width:1.5px
+
+style R fill:\#faf8ff,stroke:\#ddd0f4,stroke-width:1.5px
+
+style T fill:\#fffaf2,stroke:\#f0d3a3,stroke-width:1.5px
