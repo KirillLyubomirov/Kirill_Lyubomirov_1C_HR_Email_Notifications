@@ -1,0 +1,89 @@
+flowchart LR
+
+subgraph U[Пользователи системы]
+
+K[Кадровик]
+
+Admin[Администратор]
+
+end
+
+ 
+
+subgraph C[Кадровый контур]
+
+D[Документ\<br/\>«Кадровое изменение»]
+
+end
+
+ 
+
+subgraph S[Информационная база]
+
+R[(Регистры\<br/\>накопления)]
+
+end
+
+ 
+
+subgraph P[Получатели данных]
+
+H[Руководитель]
+
+B[Бухгалтер]
+
+O[Оператор\<br/\>уведомлений]
+
+end
+
+ 
+
+subgraph Q[Контроль]
+
+A[Аудитор]
+
+end
+
+ 
+
+K --\>\|вводит кадровое изменение\| D
+
+Admin --\>\|настраивает доступ\| D
+
+ 
+
+D --\>\|записывает движения\| R
+
+ 
+
+D --\>\|передаёт сведения\| H
+
+D --\>\|передаёт данные\| B
+
+D --\>\|инициирует уведомления\| O
+
+ 
+
+R --\>\|предоставляет данные проверки\| A
+
+ 
+
+classDef group fill:\#F8FAFC,stroke:\#CBD5E1,stroke-width:1px,color:\#111;
+
+classDef actor fill:\#EAF4FF,stroke:\#2563EB,stroke-width:1.5px,color:\#111;
+
+classDef document fill:\#FFF7ED,stroke:\#EA580C,stroke-width:2px,color:\#111;
+
+classDef registry fill:\#ECFDF5,stroke:\#059669,stroke-width:2px,color:\#111;
+
+classDef control fill:\#F5F3FF,stroke:\#7C3AED,stroke-width:1.5px,color:\#111;
+
+ 
+
+class K,Admin,H,B,O actor;
+
+class D document;
+
+class R registry;
+
+class A control;

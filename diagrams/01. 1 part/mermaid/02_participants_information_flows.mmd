@@ -1,0 +1,100 @@
+%%{init: {
+
+"theme": "base",
+
+"themeVariables": {
+
+"fontFamily": "Arial",
+
+"fontSize": "18px",
+
+"lineColor": "\#5B7EA4",
+
+"primaryTextColor": "\#333333",
+
+"tertiaryTextColor": "\#333333"
+
+}
+
+}}%%
+
+ 
+
+flowchart LR
+
+ 
+
+subgraph G1["Кадровик"]
+
+direction TB
+
+K1["Получение\<br/\>основания кадрового\<br/\>изменения"]
+
+K2["Подготовка данных\<br/\>сотрудника"]
+
+K1 --\> K2
+
+end
+
+ 
+
+subgraph G2["Ответственные лица"]
+
+direction TB
+
+R1["Ручное определение\<br/\>получателей"]
+
+R2["Уточнение\<br/\>информации\<br/\>ответственных лиц"]
+
+R1 --\> R2
+
+end
+
+ 
+
+subgraph G3["Отдельные каналы связи"]
+
+direction TB
+
+C1["Отправка\<br/\>сообщения вне\<br/\>единой системы"]
+
+end
+
+ 
+
+subgraph G4["Контроль"]
+
+direction TB
+
+Q1["Разрозненная\<br/\>фиксация\<br/\>результата"]
+
+Q2["Нет сводной\<br/\>аналитики по\<br/\>уведомлениям"]
+
+Q1 --\> Q2
+
+end
+
+ 
+
+K1 --\> R1
+
+R2 --\> C1
+
+C1 --\> Q1
+
+ 
+
+classDef step
+fill:\#F7F7F7,stroke:\#5B7EA4,stroke-width:2px,color:\#333333,rx:12,ry:12;
+
+class K1,K2,R1,R2,C1,Q1,Q2 step;
+
+ 
+
+style G1 fill:\#DCE6F2,stroke:\#B8B8B8,stroke-width:1.5px,color:\#444444
+
+style G2 fill:\#E5F0E5,stroke:\#B8B8B8,stroke-width:1.5px,color:\#444444
+
+style G3 fill:\#F2EBD8,stroke:\#B8B8B8,stroke-width:1.5px,color:\#444444
+
+style G4 fill:\#F1E3E3,stroke:\#B8B8B8,stroke-width:1.5px,color:\#444444
