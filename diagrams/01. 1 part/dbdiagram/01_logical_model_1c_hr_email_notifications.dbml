@@ -1,0 +1,15 @@
+Table Organizatsii { id uuid [pk] name varchar inn varchar kpp varchar email varchar }
+Table Podrazdeleniya { id uuid [pk] name varchar rukovoditel varchar }
+Table Dolzhnosti { id uuid [pk] name varchar bazovyy_oklad decimal }
+Table Sotrudniki { id uuid [pk] fio varchar organizatsiya_id uuid podrazdelenie_id uuid dolzhnost_id uuid email varchar }
+Table VidyKadrovykhIzmeneniy { id uuid [pk] name varchar tip varchar trebuyet_uvedomleniya boolean }
+Table PoluchateliUvedomleniy { id uuid [pk] fio varchar email varchar tip varchar }
+Table KadrovoyeIzmenenie { id uuid [pk] sotrudnik_id uuid vid_izmeneniya_id uuid data_izmeneniya date }
+Table OtpravlennyeUvedomleniya { id uuid [pk] document_id uuid poluchatel_id uuid status varchar email varchar }
+Ref: Sotrudniki.organizatsiya_id > Organizatsii.id
+Ref: Sotrudniki.podrazdelenie_id > Podrazdeleniya.id
+Ref: Sotrudniki.dolzhnost_id > Dolzhnosti.id
+Ref: KadrovoyeIzmenenie.sotrudnik_id > Sotrudniki.id
+Ref: KadrovoyeIzmenenie.vid_izmeneniya_id > VidyKadrovykhIzmeneniy.id
+Ref: OtpravlennyeUvedomleniya.document_id > KadrovoyeIzmenenie.id
+Ref: OtpravlennyeUvedomleniya.poluchatel_id > PoluchateliUvedomleniy.id
