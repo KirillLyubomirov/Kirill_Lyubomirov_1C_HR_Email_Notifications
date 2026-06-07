@@ -1,0 +1,127 @@
+%%{init: {
+
+"theme": "base",
+
+"themeVariables": {
+
+"fontFamily": "Arial",
+
+"fontSize": "17px",
+
+"lineColor": "\#5B7EA4",
+
+"primaryTextColor": "\#2F2F2F",
+
+"tertiaryTextColor": "\#2F2F2F"
+
+}
+
+}}%%
+
+ 
+
+flowchart TB
+
+ 
+
+A["Требования\<br/\>индивидуального задания"]
+
+ 
+
+subgraph S["Состав разрабатываемой конфигурации 1С"]
+
+direction LR
+
+ 
+
+B["Справочники\<br/\>\<span style='font-size:13px'\>сотрудники,
+должности,\<br/\>подразделения, получатели\</span\>"]
+
+ 
+
+C["Документы\<br/\>\<span style='font-size:13px'\>кадровое
+изменение,\<br/\>формирование уведомления\</span\>"]
+
+ 
+
+D["Регистры\<br/\>\<span style='font-size:13px'\>фиксация
+изменений,\<br/\>история уведомлений\</span\>"]
+
+ 
+
+E["Отчёты\<br/\>\<span style='font-size:13px'\>контроль
+отправки,\<br/\>аналитика уведомлений\</span\>"]
+
+ 
+
+F["Код и обработка\<br/\>\<span style='font-size:13px'\>проверка
+данных,\<br/\>автоматизация рассылки\</span\>"]
+
+ 
+
+G["Роли и\<br/\>бизнес-процесс\<br/\>\<span style='font-size:13px'\>кадровик,
+руководитель,\<br/\>бухгалтер, администратор\</span\>"]
+
+end
+
+ 
+
+A --\>\|"определяют состав объектов"\| S
+
+ 
+
+B --\>\|"используются при заполнении"\| C
+
+C --\>\|"формируют движения"\| D
+
+D --\>\|"служат источником данных"\| E
+
+ 
+
+F --\>\|"обрабатывает документы\<br/\>и выполняет отправку"\| C
+
+F --\>\|"записывает результат"\| D
+
+ 
+
+G -.-\>\|"ограничивают доступ\<br/\>и порядок действий"\| B
+
+G -.-\>\|"регламентируют работу"\| C
+
+G -.-\>\|"задают права просмотра"\| E
+
+ 
+
+classDef main fill:\#FFF4D6,stroke:\#B7791F,stroke-width:2px,color:\#222;
+
+classDef ref fill:\#EAF4FF,stroke:\#2B6CB0,stroke-width:2px,color:\#222;
+
+classDef doc fill:\#E8F7EE,stroke:\#2F855A,stroke-width:2px,color:\#222;
+
+classDef reg fill:\#F3E8FF,stroke:\#6B46C1,stroke-width:2px,color:\#222;
+
+classDef rep fill:\#FEECEC,stroke:\#C53030,stroke-width:2px,color:\#222;
+
+classDef code fill:\#FFF7ED,stroke:\#DD6B20,stroke-width:2px,color:\#222;
+
+classDef role fill:\#F1F5F9,stroke:\#475569,stroke-width:2px,color:\#222;
+
+ 
+
+class A main;
+
+class B ref;
+
+class C doc;
+
+class D reg;
+
+class E rep;
+
+class F code;
+
+class G role;
+
+ 
+
+style S fill:\#F8FAFC,stroke:\#CBD5E1,stroke-width:1.5px,color:\#333
