@@ -1,0 +1,115 @@
+%%{init: {
+
+"theme": "base",
+
+"themeVariables": {
+
+"fontFamily": "Arial",
+
+"fontSize": "17px",
+
+"primaryTextColor": "\#1f2937",
+
+"lineColor": "\#5b7ea4",
+
+"background": "\#ffffff"
+
+}
+
+}}%%
+
+ 
+
+flowchart LR
+
+ 
+
+subgraph L1["Документы и операции"]
+
+direction TB
+
+DOC["Документ\<br/\>«Кадровое изменение»"]
+
+ERR["Документы ошибок\<br/\>и повторной отправки"]
+
+end
+
+ 
+
+subgraph L2["Регистры накопления"]
+
+direction TB
+
+R1[("Кадровые события")]
+
+R2[("Отправленные уведомления")]
+
+R3[("Ошибки отправки\<br/\>уведомлений")]
+
+end
+
+ 
+
+subgraph L3["Отчётность"]
+
+direction TB
+
+O1["Отчёт\<br/\>«Кадровые изменения\<br/\>за период»"]
+
+O2["Отчёты\<br/\>по уведомлениям"]
+
+O3["Отчёт\<br/\>по ошибкам отправки"]
+
+end
+
+ 
+
+DOC --\>\|"фиксирует кадровое событие"\| R1
+
+DOC --\>\|"записывает результат уведомления"\| R2
+
+ 
+
+ERR --\>\|"регистрирует ошибку\<br/\>или повторную попытку"\| R3
+
+ 
+
+R1 --\>\|"источник данных"\| O1
+
+R2 --\>\|"источник данных"\| O2
+
+R3 --\>\|"источник данных"\| O3
+
+ 
+
+R2 -.-\>\|"контроль статусов"\| O3
+
+R3 -.-\>\|"анализ проблемных отправок"\| ERR
+
+ 
+
+classDef doc fill:\#eaf2ff,stroke:\#4c78a8,stroke-width:2px,color:\#111827;
+
+classDef reg fill:\#eafaf1,stroke:\#3fa26b,stroke-width:2px,color:\#111827;
+
+classDef rep fill:\#f4efff,stroke:\#7b61c9,stroke-width:2px,color:\#111827;
+
+classDef err fill:\#fff1f1,stroke:\#c24141,stroke-width:2px,color:\#111827;
+
+ 
+
+class DOC doc;
+
+class ERR err;
+
+class R1,R2,R3 reg;
+
+class O1,O2,O3 rep;
+
+ 
+
+style L1 fill:\#f8fbff,stroke:\#c7d7eb,stroke-width:1.5px
+
+style L2 fill:\#f7fcf9,stroke:\#c7e7d4,stroke-width:1.5px
+
+style L3 fill:\#faf8ff,stroke:\#ddd0f4,stroke-width:1.5px
