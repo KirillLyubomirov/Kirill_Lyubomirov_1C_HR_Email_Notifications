@@ -1,0 +1,115 @@
+%%{init: {
+
+"theme": "base",
+
+"themeVariables": {
+
+"fontFamily": "Arial",
+
+"fontSize": "17px",
+
+"lineColor": "\#5B7EA4",
+
+"primaryTextColor": "\#2F2F2F",
+
+"tertiaryTextColor": "\#2F2F2F"
+
+}
+
+}}%%
+
+ 
+
+flowchart LR
+
+ 
+
+subgraph P1["Постановка задачи"]
+
+direction TB
+
+A["Индивидуальное\<br/\>задание"]
+
+end
+
+ 
+
+subgraph P2["Разработка и проверка"]
+
+direction LR
+
+B["Конфигурация\<br/\>1С"]
+
+C["Тестовые\<br/\>данные"]
+
+D["Отчёты и\<br/\>бизнес-процесс"]
+
+end
+
+ 
+
+subgraph P3["Передача результата"]
+
+direction LR
+
+E["Выгрузки\<br/\>.cf / .dt"]
+
+F["Публичный\<br/\>репозиторий\<br/\>GitHub"]
+
+G["Отчёт\<br/\>по практике"]
+
+end
+
+ 
+
+A --\>\|"определяет требования\<br/\>к разработке"\| B
+
+B --\>\|"реализует объекты\<br/\>и логику работы"\| C
+
+C --\>\|"используются для\<br/\>проверки сценариев"\| D
+
+D --\>\|"подтверждают\<br/\>работоспособность"\| E
+
+E --\>\|"размещаются вместе\<br/\>с материалами проекта"\| F
+
+F --\>\|"указывается как\<br/\>результат публикации"\| G
+
+ 
+
+B -.-\>\|"справочники, документы,\<br/\>регистры, роли"\| D
+
+D -.-\>\|"скриншоты, описание,\<br/\>пояснение логики"\| G
+
+E -.-\>\|"резервная копия\<br/\>и файл конфигурации"\| G
+
+ 
+
+classDef task fill:\#FFF4D6,stroke:\#B7791F,stroke-width:2px,color:\#222;
+
+classDef dev fill:\#EAF4FF,stroke:\#2B6CB0,stroke-width:2px,color:\#222;
+
+classDef test fill:\#E8F7EE,stroke:\#2F855A,stroke-width:2px,color:\#222;
+
+classDef result fill:\#F3E8FF,stroke:\#6B46C1,stroke-width:2px,color:\#222;
+
+classDef report fill:\#FEECEC,stroke:\#C53030,stroke-width:2px,color:\#222;
+
+ 
+
+class A task;
+
+class B dev;
+
+class C,D test;
+
+class E,F result;
+
+class G report;
+
+ 
+
+style P1 fill:\#FFF9E8,stroke:\#D6BC7B,stroke-width:1.5px,color:\#333
+
+style P2 fill:\#F0F7FF,stroke:\#A8C5E6,stroke-width:1.5px,color:\#333
+
+style P3 fill:\#F7F0FF,stroke:\#C6B4E8,stroke-width:1.5px,color:\#333
