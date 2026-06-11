@@ -1,0 +1,143 @@
+erDiagram
+
+ORGANIZATSIYA \|\|--o{ PODRAZDELENIE : contains
+
+PODRAZDELENIE \|\|--o{ SOTRUDNIK : includes
+
+DOLZHNOST \|\|--o{ SOTRUDNIK : assigned_to
+
+SOTRUDNIK \|\|--o{ KADROVOYE_IZMENENIYE : has
+
+VID_IZMENENIYA \|\|--o{ KADROVOYE_IZMENENIYE : classifies
+
+VID_IZMENENIYA \|\|--o{ PRAVILO_RASSYLKI : uses
+
+PRAVILO_RASSYLKI }o--o{ POLUCHATEL : targets
+
+KADROVOYE_IZMENENIYE \|\|--o{ KADROVOYE_SOBYTIE : writes
+
+KADROVOYE_IZMENENIYE \|\|--o{ OTPRAVLENNOYE_UVEDOMLENIYE : writes
+
+ 
+
+ORGANIZATSIYA {
+
+int id
+
+string naimenovanie
+
+}
+
+ 
+
+PODRAZDELENIE {
+
+int id
+
+int organizatsiya_id
+
+string naimenovanie
+
+}
+
+ 
+
+DOLZHNOST {
+
+int id
+
+string naimenovanie
+
+}
+
+ 
+
+SOTRUDNIK {
+
+int id
+
+int podrazdelenie_id
+
+int dolzhnost_id
+
+string fio
+
+}
+
+ 
+
+VID_IZMENENIYA {
+
+int id
+
+string naimenovanie
+
+}
+
+ 
+
+KADROVOYE_IZMENENIYE {
+
+int id
+
+int sotrudnik_id
+
+int vid_izmeneniya_id
+
+date data_izmeneniya
+
+boolean trebuetsya_uvedomleniye
+
+}
+
+ 
+
+PRAVILO_RASSYLKI {
+
+int id
+
+int vid_izmeneniya_id
+
+string naimenovanie
+
+}
+
+ 
+
+POLUCHATEL {
+
+int id
+
+string fio
+
+string email
+
+}
+
+ 
+
+KADROVOYE_SOBYTIE {
+
+int id
+
+int kadrovoye_izmeneniye_id
+
+date data_sobytiya
+
+string status
+
+}
+
+ 
+
+OTPRAVLENNOYE_UVEDOMLENIYE {
+
+int id
+
+int kadrovoye_izmeneniye_id
+
+date data_otpravki
+
+string status
+
+}
