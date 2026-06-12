@@ -1,0 +1,76 @@
+Project HR_Email_Notifications_1C {
+  database_type: "1C metadata logical model"
+}
+
+Table Spr_Organizatsii {
+  id uuid [pk]
+  naimenovanie varchar
+}
+
+Table Spr_Podrazdeleniya {
+  id uuid [pk]
+  organizatsiya_id uuid [ref: > Spr_Organizatsii.id]
+  naimenovanie varchar
+}
+
+Table Spr_Dolzhnosti {
+  id uuid [pk]
+  naimenovanie varchar
+}
+
+Table Spr_Sotrudniki {
+  id uuid [pk]
+  podrazdelenie_id uuid [ref: > Spr_Podrazdeleniya.id]
+  dolzhnost_id uuid [ref: > Spr_Dolzhnosti.id]
+  fio varchar
+  email varchar
+}
+
+Table Spr_VidyKadrovykhIzmeneniy {
+  id uuid [pk]
+  tip varchar
+  prioritet varchar
+}
+
+Table Spr_PoluchateliUvedomleniy {
+  id uuid [pk]
+  email varchar
+  tip_poluchatelya varchar
+}
+
+Table Spr_ShablynyPisem {
+  id uuid [pk]
+  tema varchar
+  tekst text
+}
+
+Table Spr_PravilaRassylki {
+  id uuid [pk]
+  vid_izmeneniya_id uuid [ref: > Spr_VidyKadrovykhIzmeneniy.id]
+  shablon_id uuid [ref: > Spr_ShablynyPisem.id]
+}
+
+Table Doc_KadrovoyeIzmenenie {
+  id uuid [pk]
+  sotrudnik_id uuid [ref: > Spr_Sotrudniki.id]
+  vid_izmeneniya_id uuid [ref: > Spr_VidyKadrovykhIzmeneniy.id]
+  data_izmeneniya date
+  trebuyetsya_uvedomleniye boolean
+  status_uvedomleniya varchar
+}
+
+Table Reg_KadrovyeSobytiya {
+  id uuid [pk]
+  document_id uuid [ref: > Doc_KadrovoyeIzmenenie.id]
+  sotrudnik_id uuid [ref: > Spr_Sotrudniki.id]
+  vid_izmeneniya_id uuid [ref: > Spr_VidyKadrovykhIzmeneniy.id]
+  kolichestvo int
+}
+
+Table Reg_OtpravlennyeUvedomleniya {
+  id uuid [pk]
+  document_id uuid [ref: > Doc_KadrovoyeIzmenenie.id]
+  poluchatel_id uuid [ref: > Spr_PoluchateliUvedomleniy.id]
+  status varchar
+  kolichestvo int
+}
