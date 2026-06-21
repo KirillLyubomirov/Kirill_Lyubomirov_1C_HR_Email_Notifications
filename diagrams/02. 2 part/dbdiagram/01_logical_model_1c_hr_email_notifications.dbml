@@ -1,5 +1,6 @@
 Project HR_Email_Notifications_1C {
   database_type: "1C metadata logical model"
+  Note: "Логическая модель данных подсистемы кадровых уведомлений"
 }
 
 Table Spr_Organizatsii {
@@ -24,30 +25,54 @@ Table Spr_Sotrudniki {
   dolzhnost_id uuid [ref: > Spr_Dolzhnosti.id]
   fio varchar
   email varchar
+  aktiven boolean
 }
 
 Table Spr_VidyKadrovykhIzmeneniy {
   id uuid [pk]
-  tip varchar
+  naimenovanie varchar
+  tip_izmeneniya varchar
   prioritet varchar
+  trebuet_uvedomleniya boolean
 }
 
 Table Spr_PoluchateliUvedomleniy {
   id uuid [pk]
+  fio varchar
   email varchar
   tip_poluchatelya varchar
+  aktiven boolean
 }
 
-Table Spr_ShablynyPisem {
+Table Spr_GruppyPoluchateley {
   id uuid [pk]
+  naimenovanie varchar
+  opisanie text
+}
+
+Table Spr_GruppyPoluchateley_Sostav {
+  id uuid [pk]
+  gruppa_id uuid [ref: > Spr_GruppyPoluchateley.id]
+  poluchatel_id uuid [ref: > Spr_PoluchateliUvedomleniy.id]
+  kommentariy varchar
+}
+
+Table Spr_ShablonyPisem {
+  id uuid [pk]
+  naimenovanie varchar
   tema varchar
   tekst text
+  aktiven boolean
 }
 
 Table Spr_PravilaRassylki {
   id uuid [pk]
+  naimenovanie varchar
   vid_izmeneniya_id uuid [ref: > Spr_VidyKadrovykhIzmeneniy.id]
-  shablon_id uuid [ref: > Spr_ShablynyPisem.id]
+  gruppa_poluchateley_id uuid [ref: > Spr_GruppyPoluchateley.id]
+  shablon_id uuid [ref: > Spr_ShablonyPisem.id]
+  prioritet varchar
+  aktiven boolean
 }
 
 Table Doc_KadrovoyeIzmenenie {
@@ -57,6 +82,17 @@ Table Doc_KadrovoyeIzmenenie {
   data_izmeneniya date
   trebuyetsya_uvedomleniye boolean
   status_uvedomleniya varchar
+  osnovanie varchar
+  kommentariy text
+}
+
+Table Doc_KadrovoyeIzmenenie_Poluchateli {
+  id uuid [pk]
+  document_id uuid [ref: > Doc_KadrovoyeIzmenenie.id]
+  poluchatel_id uuid [ref: > Spr_PoluchateliUvedomleniy.id]
+  email varchar
+  status_uvedomleniya varchar
+  kommentariy varchar
 }
 
 Table Reg_KadrovyeSobytiya {
@@ -64,13 +100,28 @@ Table Reg_KadrovyeSobytiya {
   document_id uuid [ref: > Doc_KadrovoyeIzmenenie.id]
   sotrudnik_id uuid [ref: > Spr_Sotrudniki.id]
   vid_izmeneniya_id uuid [ref: > Spr_VidyKadrovykhIzmeneniy.id]
+  period date
   kolichestvo int
 }
 
 Table Reg_OtpravlennyeUvedomleniya {
   id uuid [pk]
   document_id uuid [ref: > Doc_KadrovoyeIzmenenie.id]
+  sotrudnik_id uuid [ref: > Spr_Sotrudniki.id]
+  vid_izmeneniya_id uuid [ref: > Spr_VidyKadrovykhIzmeneniy.id]
   poluchatel_id uuid [ref: > Spr_PoluchateliUvedomleniy.id]
+  period date
+  email varchar
   status varchar
+  kolichestvo int
+}
+
+Table Reg_OshibkiOtpravkiUvedomleniy {
+  id uuid [pk]
+  document_id uuid [ref: > Doc_KadrovoyeIzmenenie.id]
+  vid_izmeneniya_id uuid [ref: > Spr_VidyKadrovykhIzmeneniy.id]
+  poluchatel_id uuid [ref: > Spr_PoluchateliUvedomleniy.id]
+  period date
+  opisanie_oshibki varchar
   kolichestvo int
 }
